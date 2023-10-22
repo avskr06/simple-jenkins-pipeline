@@ -17,12 +17,12 @@ pipeline {
         sh 'node --version'
       }
     }
-    stage('mem-cache') {
+    stage('run hello world') {
       agent {
-        docker { image 'postgres:alpine3.18' }
+        docker { image 'hello-world:latest' }
       }
       steps {
-        sh 'psql –version'
+        echo 'hello-world'
       }
     }   
   }
