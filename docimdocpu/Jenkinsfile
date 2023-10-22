@@ -3,10 +3,10 @@ pipeline {
   stages {
     stage('Back-end') {
       agent {
-        docker { image 'alpine:3.18.4' }
+        docker { image 'maven:3.8.1-adoptopenjdk-11' }
       }
       steps {
-        sh 'alpine -v'
+        sh 'mvn --version'
       }
     }
     stage('Front-end') {
@@ -16,14 +16,15 @@ pipeline {
       steps {
         sh 'node --version'
       }
-    stage('Mem-cache') {
+    }
+    stage('Front-end') {
       agent {
-        docker { image 'redis:alpine3.18' }
+        docker { image 'node:16-alpine' }
       }
       steps {
-        sh 'redis-cli INFO server'
-        }
-      }  
-    }
-  }   
+        sh 'node --version'
+      }
+    }   
+  }
 }
+
