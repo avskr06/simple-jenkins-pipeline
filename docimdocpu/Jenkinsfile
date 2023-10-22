@@ -20,13 +20,13 @@ pipeline {
     stage('run hello world') {
       agent {
         docker { 
-            image 'hello-world:latest'
-            args 'docker run official-image bash ENTRYPOINT ["/docker-entrypoint.sh"]' 
+            image 'httpd:alpine3.18'
+            
           
                }
       }
       steps {
-        sh 'echo "hello-world"'
+        sh 'httpd -v'
       }
     }   
   }
