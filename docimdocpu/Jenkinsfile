@@ -22,7 +22,7 @@ pipeline {
         docker { image 'hello-world:latest' }
       }
       steps {
-        echo 'hello-world'
+        sh 'echo "hello-world"'
       }
     }   
   }
