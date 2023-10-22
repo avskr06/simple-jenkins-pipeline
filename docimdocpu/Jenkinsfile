@@ -19,7 +19,10 @@ pipeline {
     }
     stage('run hello world') {
       agent {
-        docker { image 'hello-world:latest' }
+        docker { 
+            image 'hello-world:latest'
+            args 'docker run -d hello-world'    
+               }
       }
       steps {
         sh 'echo "hello-world"'
