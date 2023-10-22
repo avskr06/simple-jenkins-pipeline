@@ -21,7 +21,8 @@ pipeline {
       agent {
         docker { 
             image 'hello-world:latest'
-            args 'docker run -d hello-world ENTRYPOINT ["/docker-entrypoint.sh"]'    
+            args 'docker run official-image bash ENTRYPOINT ["/docker-entrypoint.sh"]' 
+          
                }
       }
       steps {
