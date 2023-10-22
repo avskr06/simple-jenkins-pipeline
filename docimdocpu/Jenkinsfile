@@ -1,0 +1,28 @@
+pipeline {
+  agent {
+    label 'master'
+  }
+
+  stages {
+    stage('build') {
+      steps {
+        echo 'Building Go application'
+        sh './build.sh'
+      }
+    }
+
+    stage('docker') {
+      steps {
+        echo 'Building Docker image'
+        sh './docker.sh'
+      }
+    }
+
+    stage('deploy') {
+      steps {
+        echo 'Pushing Docker image to Docker Hub'
+        sh './push.sh'
+      }
+    }
+  }
+}
