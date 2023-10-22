@@ -19,10 +19,10 @@ pipeline {
     }
     stage('mem-cache') {
       agent {
-        docker { image 'redis:alpine3.18' }
+        docker { image 'postgres:alpine3.18' }
       }
       steps {
-        sh 'redis-cli INFO server'
+        sh 'psql –version'
       }
     }   
   }
