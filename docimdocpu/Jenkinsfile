@@ -1,26 +1,27 @@
 pipeline {
-  agent {
-    label 'main'
-  }
+  agent none
   stages {
-    stage('build') {
+    stage('Back-end') {
+      agent {
+        docker { image 'alpine:3.18.4' }
+      }
       steps {
-        echo 'Building Go application'
-        sh './build.sh'
+        sh 'alpine -v'
       }
     }
-
-    stage('docker') {
-      steps {
-        echo 'Building Docker image'
-        sh './docker.sh'
+    stage('Front-end') {
+      agent {
+        docker { image 'node:16-alpine' }
       }
-    }
-
-    stage('deploy') {
       steps {
-        echo 'Pushing Docker image to Docker Hub'
-        sh './push.sh'
+        sh 'node --version'
+      }
+      stage('Mem-cache') {
+      agent {
+        docker { image 'redis:alpine3.18' }
+      }
+      steps {
+        sh 'redis-cli INFO server'
       }
     }
   }
